@@ -4,19 +4,19 @@ export default function Depoimentos() {
       nome: "Maria Silva",
       curso: "Técnico em Marketing",
       texto: "A metodologia dos cursos é prática e direto ao ponto. O resultado é muito satisfatório e superou minhas expectativas!",
-      avatar: "/images/avatar1.jpg"
+      avatar: "/avatar1.jpg"
     },
     {
       nome: "João Santos",
       curso: "Técnico em Enfermagem",
       texto: "Consegui uma promoção apenas 3 meses após concluir o curso. Agora atuo em uma grande empresa com um salário muito melhor.",
-      avatar: "/images/avatar2.jpg"
+      avatar: "/avatar2.jpg"
     },
     {
       nome: "Ana Costa",
       curso: "Técnico em Segurança do Trabalho",
       texto: "O curso é muito completo e me preparou para as exigências do mercado. Recomendo para todos que querem crescer na área.",
-      avatar: "/images/avatar3.jpg"
+      avatar: "/avatar3.jpg"
     }
   ];
 
@@ -32,7 +32,11 @@ export default function Depoimentos() {
           {depoimentos.map((depoimento, index) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow-md">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                <img
+                  src={depoimento.avatar}
+                  alt={depoimento.nome}
+                  className="w-12 h-12 rounded-full mr-4 object-cover"
+                />
                 <div>
                   <h3 className="font-semibold">{depoimento.nome}</h3>
                   <p className="text-sm text-gray-600">{depoimento.curso}</p>
