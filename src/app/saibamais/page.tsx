@@ -2,11 +2,11 @@
 
 
 import Footer from "@/components/Footer";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 
 export default function SaibaMais() {
   const [activeTab, setActiveTab] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+
   const [showModalConsultor, setShowModalConsultor] = useState(false);
   const [showModalInscricao, setShowModalInscricao] = useState(false);
   const [formData, setFormData] = useState({
@@ -16,9 +16,7 @@ export default function SaibaMais() {
     cursoInteresse: ""
   });
 
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+ 
 
   const beneficios = [
     {
@@ -260,7 +258,7 @@ const handleInputChange = (
                   className="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
                 >
                   <div className="text-4xl mb-4">{depoimento.avatar}</div>
-                  <p className="text-gray-600 italic mb-4">"{depoimento.texto}"</p>
+                  <p className="text-gray-600 italic mb-4">{depoimento.texto}</p>
                   <div className="border-t pt-4">
                     <div className="font-bold text-gray-800">{depoimento.nome}</div>
                     <div className="text-blue-600 text-sm">{depoimento.curso}</div>

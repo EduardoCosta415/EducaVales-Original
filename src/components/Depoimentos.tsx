@@ -42,7 +42,7 @@ export default function Depoimentos() {
                   <p className="text-sm text-black">{depoimento.curso}</p>
                 </div>
               </div>
-              <p className="text-black italic">"{depoimento.texto}"</p>
+              <p className="text-black italic">{depoimento.texto}</p>
             </div>
           ))}
         </div>
