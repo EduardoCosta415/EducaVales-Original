@@ -21,9 +21,9 @@ export default function Depoimentos() {
   ];
 
   return (
-    <section id="depoimentos" className="py-16">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">O que nossos alunos dizem</h2>
+    <section id="depoimentos" className="py-16 bg-gradient-to-tr from-white to-orange-50">
+      <div className="container mx-auto px-4 bg-gradient-to-tr from-white to-orange-50">
+        <h2 className="text-3xl font-bold text-center mb-12 text-black">O que nossos alunos dizem</h2>
         <p className="text-lg text-gray-700 text-center max-w-3xl mx-auto mb-12">
           Depoimentos de quem já transformou sua carreira e conquistou novas oportunidades.
         </p>
@@ -38,11 +38,11 @@ export default function Depoimentos() {
                   className="w-12 h-12 rounded-full mr-4 object-cover"
                 />
                 <div>
-                  <h3 className="font-semibold">{depoimento.nome}</h3>
-                  <p className="text-sm text-gray-600">{depoimento.curso}</p>
+                  <h3 className="font-semibold text-black">{depoimento.nome}</h3>
+                  <p className="text-sm text-black">{depoimento.curso}</p>
                 </div>
               </div>
-              <p className="text-gray-700 italic">"{depoimento.texto}"</p>
+              <p className="text-black italic">"{depoimento.texto}"</p>
             </div>
           ))}
         </div>

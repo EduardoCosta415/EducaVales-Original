@@ -1,16 +1,30 @@
-// src/components/CursosSection.jsx
+// src/components/CursosSection.tsx
 'use client';
 
 import { cursos } from "@/data/cursosData";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
+
+// Tipagem do curso
+interface Curso {
+  id: number;
+  titulo: string;
+  descricao: string;
+  preco: string;
+  conteudo?: string[];
+}
+
+// Props do card
+interface CourseCardProps {
+  curso: Curso;
+  onOpenModal: (curso: Curso) => void;
+}
 
 // Componente do card de curso
-function CourseCard({ curso, onOpenModal }) {
+function CourseCard({ curso, onOpenModal }: CourseCardProps) {
   const conteudo = curso.conteudo || [];
 
   return (
     <div className="flex flex-col h-full bg-white rounded-xl shadow-lg border border-orange-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-orange-300">
-      {/* Cabeçalho com gradiente */}
       <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-5 rounded-t-xl">
         <h3 className="text-xl font-bold">{curso.titulo}</h3>
         <div className="w-12 h-1 bg-white mt-2 rounded-full"></div>
@@ -42,7 +56,6 @@ function CourseCard({ curso, onOpenModal }) {
           ))}
         </ul>
 
-        {/* Rodapé do card */}
         <div className="mt-auto pt-5 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-2xl font-bold text-orange-600 text-center sm:text-left">
             R$ {curso.preco}
@@ -80,13 +93,20 @@ function CourseCard({ curso, onOpenModal }) {
   );
 }
 
+// Props do modal
+interface WhatsAppModalProps {
+  curso: Curso | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
 // Modal de WhatsApp
-function WhatsAppModal({ curso, isOpen, onClose }) {
+function WhatsAppModal({ curso, isOpen, onClose }: WhatsAppModalProps) {
   const [form, setForm] = useState({ nome: "", telefone: "", email: "" });
 
-  if (!isOpen) return null;
+  if (!isOpen || !curso) return null;
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -113,21 +133,21 @@ function WhatsAppModal({ curso, isOpen, onClose }) {
           type="text"
           name="nome"
           placeholder="Seu nome"
-          className="w-full mb-3 p-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none"
+          className="w-full mb-3 p-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none text-black placeholder:text-black"
           onChange={handleChange}
         />
         <input
           type="tel"
           name="telefone"
           placeholder="Seu telefone"
-          className="w-full mb-3 p-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none"
+          className="w-full mb-3 p-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none text-black placeholder:text-black"
           onChange={handleChange}
         />
         <input
           type="email"
           name="email"
           placeholder="Seu e-mail"
-          className="w-full mb-3 p-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none"
+          className="w-full mb-3 p-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none text-black placeholder:text-black"
           onChange={handleChange}
         />
 
@@ -153,7 +173,7 @@ function WhatsAppModal({ curso, isOpen, onClose }) {
 // Componente principal
 export default function CursosSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedCurso, setSelectedCurso] = useState(null);
+  const [selectedCurso, setSelectedCurso] = useState<Curso | null>(null);
 
   useEffect(() => {
     setIsVisible(true);
@@ -170,7 +190,6 @@ export default function CursosSection() {
           </p>
         </div>
 
-        {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {cursos.slice(0, 6).map((curso, index) => (
             <div
@@ -184,7 +203,6 @@ export default function CursosSection() {
         </div>
       </div>
 
-      {/* Modal */}
       <WhatsAppModal
         curso={selectedCurso}
         isOpen={!!selectedCurso}

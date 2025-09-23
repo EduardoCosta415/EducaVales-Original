@@ -98,21 +98,21 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
               </Link>
               <Link 
-                href="#sobre" 
+                href="/#sobre" 
                 className="text-gray-800 hover:text-orange-500 font-medium transition-colors relative group"
               >
                 Sobre
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
               </Link>
               <Link
-                href="#cursos" 
+                href="/#cursos" 
                 className="text-gray-800 hover:text-orange-500 font-medium transition-colors relative group"
               >
                 Cursos
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
               </Link>
               <Link 
-                href="#depoimentos" 
+                href="/#depoimentos" 
                 className="text-gray-800 hover:text-orange-500 font-medium transition-colors relative group"
               >
                 Depoimentos
@@ -194,7 +194,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
       {/* Modal de Cadastro */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-gray-900/90 bg-opacity-75 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl p-8 max-w-lg w-full shadow-2xl relative transform transition-all scale-100 opacity-100 duration-300">
             <button 
               onClick={handleCloseModal}
@@ -214,7 +214,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                   name="tipoCadastro"
                   value={formData.tipoCadastro}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 transition-colors text-black"
                 >
                   <option value="cadastro">Cadastro (para alunos)</option>
                   <option value="pre-cadastro">Pré-cadastro (para mais informações)</option>
@@ -228,7 +228,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                   name="curso"
                   value={formData.curso}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors text-black"
                 >
                   <option value="">Selecione um curso</option>
                   <option value="desenvolvimento-web">Enfermagem</option>
@@ -242,14 +242,14 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
               {/* Nome */}
               <div>
-                <label className="block text-gray-700 font-medium mb-1">Nome Completo</label>
+                <label className="block text-gray-900 font-medium mb-1">Nome Completo</label>
                 <input 
                   type="text" 
                   name="nome"
                   value={formData.nome}
                   onChange={handleChange}
                   placeholder="Seu nome" 
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors" 
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors text-black" 
                 />
               </div>
 
@@ -262,7 +262,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="seu-email@exemplo.com" 
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors" 
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors text-black" 
                 />
               </div>
 

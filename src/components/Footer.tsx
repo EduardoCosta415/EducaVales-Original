@@ -1,9 +1,16 @@
-"use client";
-import { useState } from "react";
+'use client';
+import { useState, MouseEvent } from "react";
 import Link from "next/link";
 
+type ModalType = "privacidade" | "termos" | null;
+
 export default function Footer() {
-  const [openModal, setOpenModal] = useState(null); // "privacidade" | "termos" | null
+  const [openModal, setOpenModal] = useState<ModalType>(null);
+
+  const handleCloseModal = (e?: MouseEvent<HTMLButtonElement>) => {
+    if (e) e.stopPropagation();
+    setOpenModal(null);
+  };
 
   return (
     <>
@@ -84,6 +91,7 @@ export default function Footer() {
                   Contato
                 </h4>
                 <ul className="space-y-3">
+                  {/* Endereço */}
                   <li className="flex items-start">
                     <svg
                       className="w-5 h-5 text-orange-500 mr-3 mt-1 flex-shrink-0"
@@ -105,10 +113,10 @@ export default function Footer() {
                       />
                     </svg>
                     <span className="text-gray-400">
-                      Rua Luiz Rodrigues dos Santos, nº 44, Coronel Fabriciano -
-                      Minas Gerais, 35170-061
+                      Rua Luiz Rodrigues dos Santos, nº 44, Coronel Fabriciano - Minas Gerais, 35170-061
                     </span>
                   </li>
+                  {/* Telefone */}
                   <li className="flex items-center">
                     <svg
                       className="w-5 h-5 text-orange-500 mr-3 flex-shrink-0"
@@ -125,6 +133,7 @@ export default function Footer() {
                     </svg>
                     <span className="text-gray-400">(11) 3000-1000</span>
                   </li>
+                  {/* Email */}
                   <li className="flex items-center">
                     <svg
                       className="w-5 h-5 text-orange-500 mr-3 flex-shrink-0"
@@ -139,10 +148,9 @@ export default function Footer() {
                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                       />
                     </svg>
-                    <span className="text-gray-400">
-                      contato@educavalestec.com
-                    </span>
+                    <span className="text-gray-400">contato@educavalestec.com</span>
                   </li>
+                  {/* Horário */}
                   <li className="flex items-center">
                     <svg
                       className="w-5 h-5 text-orange-500 mr-3 flex-shrink-0"
@@ -168,12 +176,8 @@ export default function Footer() {
           <div className="py-8 border-b border-gray-700">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="mb-4 md:mb-0">
-                <h4 className="text-lg font-semibold mb-2">
-                  Assine nossa newsletter
-                </h4>
-                <p className="text-gray-400">
-                  Receba novidades e atualizações sobre nossos cursos.
-                </p>
+                <h4 className="text-lg font-semibold mb-2">Assine nossa newsletter</h4>
+                <p className="text-gray-400">Receba novidades e atualizações sobre nossos cursos.</p>
               </div>
               <div className="flex w-full md:w-auto">
                 <input
@@ -190,37 +194,18 @@ export default function Footer() {
 
           {/* Copyright e pagamentos */}
           <div className="pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              © 2023 EducaValesTec. Todos os direitos reservados.
-            </p>
+            <p className="text-gray-400 text-sm mb-4 md:mb-0">© 2023 EducaValesTec. Todos os direitos reservados.</p>
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-gray-400 text-sm mr-2">
-                Métodos de pagamento:
-              </span>
+              <span className="text-gray-400 text-sm mr-2">Métodos de pagamento:</span>
               <div className="flex flex-wrap gap-2">
-                {/* Cartão */}
                 <div className="bg-gray-800 p-2 rounded flex items-center justify-center">
-                  <img
-                    src="/credit.webp"
-                    alt="Cartão de Crédito"
-                    className="w-10 h-6 object-contain"
-                  />
+                  <img src="/credit.webp" alt="Cartão de Crédito" className="w-10 h-6 object-contain" />
                 </div>
-                {/* Boleto */}
                 <div className="bg-gray-800 p-2 rounded flex items-center justify-center">
-                  <img
-                    src="/Boleto.webp"
-                    alt="Boleto Bancário"
-                    className="w-10 h-6 object-contain"
-                  />
+                  <img src="/Boleto.webp" alt="Boleto Bancário" className="w-10 h-6 object-contain" />
                 </div>
-                {/* Pix */}
                 <div className="bg-gray-800 p-2 rounded flex items-center justify-center">
-                  <img
-                    src="/pix.png"
-                    alt="Pix"
-                    className="w-10 h-6 object-contain"
-                  />
+                  <img src="/pix.png" alt="Pix" className="w-10 h-6 object-contain" />
                 </div>
               </div>
             </div>
@@ -232,68 +217,24 @@ export default function Footer() {
       {openModal && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
           <div className="bg-gray-900 rounded-lg shadow-lg max-w-4xl w-full p-6 relative text-gray-300 overflow-y-auto max-h-[80vh]">
-            {/* Botão de fechar */}
             <button
-              onClick={() => setOpenModal(null)}
+              onClick={handleCloseModal}
               className="absolute top-3 right-3 text-gray-400 hover:text-orange-500 text-2xl"
             >
               &times;
             </button>
 
-            {/* Conteúdo do modal */}
             {openModal === "privacidade" && (
               <>
-                <h2 className="text-xl font-bold mb-4 text-white">
-                  Política de Privacidade
-                </h2>
-                <p className="mb-2">
-                  A sua privacidade é importante para nós. Esta Política de Privacidade explica como
-                  coletamos, usamos, divulgamos e protegemos as suas informações quando você usa nossos
-                  serviços, sites, aplicativos e APIs. Ao usar os serviços, você concorda com a coleta e uso de informações conforme descrito nesta política.
-                </p>
-                <h3 className="text-lg font-semibold mt-4 mb-2 text-white">Informações que coletamos</h3>
-                <ul className="list-disc ml-5 mb-2">
-                  <li>Nome, e-mail, telefone, endereço e dados de pagamento.</li>
-                  <li>Dados de uso: páginas visitadas, cliques, tempo de permanência.</li>
-                  <li>Dados técnicos: IP, navegador, sistema operacional.</li>
-                  <li>Cookies e tecnologias similares.</li>
-                </ul>
-                <h3 className="text-lg font-semibold mt-4 mb-2 text-white">Como usamos as informações</h3>
-                <ul className="list-disc ml-5 mb-2">
-                  <li>Fornecer, operar e manter os serviços.</li>
-                  <li>Melhorar e personalizar a experiência do usuário.</li>
-                  <li>Comunicar atualizações e ofertas.</li>
-                  <li>Processar pagamentos e prevenir fraudes.</li>
-                </ul>
-                <h3 className="text-lg font-semibold mt-4 mb-2 text-white">Segurança dos dados</h3>
-                <p className="mb-2">
-                  Implementamos medidas razoáveis para proteger suas informações, mas nenhum método é 100% seguro.
-                </p>
-                <h3 className="text-lg font-semibold mt-4 mb-2 text-white">Seus direitos</h3>
-                <p className="mb-2">
-                  Você pode solicitar acesso, correção ou exclusão dos seus dados pessoais a qualquer momento.
-                </p>
+                <h2 className="text-xl font-bold mb-4 text-white">Política de Privacidade</h2>
+                <p className="mb-2">A sua privacidade é importante...</p>
               </>
             )}
 
             {openModal === "termos" && (
               <>
-                <h2 className="text-xl font-bold mb-4 text-white">
-                  Termos de Uso
-                </h2>
-                <p className="mb-2">
-                  Estes Termos de Uso regulam o acesso e a utilização dos nossos serviços. Ao acessá-los, você concorda em cumprir todas as condições aqui estabelecidas.
-                </p>
-                <h3 className="text-lg font-semibold mt-4 mb-2 text-white">Responsabilidades do usuário</h3>
-                <ul className="list-disc ml-5 mb-2">
-                  <li>Utilizar os serviços de forma lícita.</li>
-                  <li>Não compartilhar acessos ou informações confidenciais.</li>
-                  <li>Respeitar direitos autorais e de propriedade intelectual.</li>
-                </ul>
-                <h3 className="text-lg font-semibold mt-4 mb-2 text-white">Limitação de responsabilidade</h3>
-                <p className="mb-2">
-                  Não nos responsabilizamos por danos indiretos, acidentais ou consequenciais decorrentes do uso dos serviços.
-                </p>
+                <h2 className="text-xl font-bold mb-4 text-white">Termos de Uso</h2>
+                <p className="mb-2">Estes Termos de Uso regulam o acesso...</p>
               </>
             )}
           </div>

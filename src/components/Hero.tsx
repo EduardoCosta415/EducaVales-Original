@@ -49,7 +49,7 @@ export default function Hero() {
             </Link>
             
             <Link 
-              href="/sobre" 
+              href="/saibamais" 
               className="border-2 border-white text-white font-bold py-4 px-8 rounded-full hover:bg-white hover:text-orange-600 transition-all duration-300"
             >
               Saiba Mais
