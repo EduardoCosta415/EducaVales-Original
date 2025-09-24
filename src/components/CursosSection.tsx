@@ -21,6 +21,18 @@ interface CourseCardProps {
   onOpenModal: (curso: Curso) => void;
 }
 
+/** Helper p/ extrair mensagem sem usar `any` */
+function getErrorMessage(e: unknown): string {
+  if (e instanceof Error) return e.message;
+  if (typeof e === "string") return e;
+  if (e && typeof e === "object") {
+    const obj = e as Record<string, unknown>;
+    if (typeof obj.message === "string") return obj.message;
+    if (typeof obj.error === "string") return obj.error;
+  }
+  return "Ocorreu um erro inesperado.";
+}
+
 function CourseCard({ curso, onOpenModal }: CourseCardProps) {
   const conteudo = curso.conteudo || [];
 
@@ -121,7 +133,7 @@ function WhatsAppModal({ curso, isOpen, onClose }: WhatsAppModalProps) {
       return;
     }
 
-    //Montagem da API
+    // Montagem da API
     const areaOfInterest = curso.titulo;
     const enterpriseId = toSafeNumber(process.env.NEXT_PUBLIC_ENTERPRISE_ID, 1);
 
@@ -137,19 +149,17 @@ function WhatsAppModal({ curso, isOpen, onClose }: WhatsAppModalProps) {
       await submitSubscription(payload);
 
       setStatusMsg("Cadastro enviado com sucesso! Abrindo WhatsApp...");
-      // Mensagem para o WhatsApp
       const mensagem = `Olá! Meu nome é ${form.nome}, meu telefone é ${form.telefone}, meu e-mail é ${form.email}. Tenho interesse no curso: ${curso.titulo} (R$ ${curso.preco})`;
       const url = `https://wa.me/5531996636957?text=${encodeURIComponent(
         mensagem
       )}`;
 
-      // Abre WhatsApp e fecha modal
       window.open(url, "_blank");
       onClose();
-    } catch (err: any) {
-      console.error("Erro ao criar lead:", err);
+    } catch (e: unknown) {
+      console.error("Erro ao criar lead:", e);
       setStatusMsg(
-        err?.message || "Erro ao enviar o cadastro. Tente novamente."
+        getErrorMessage(e) || "Erro ao enviar o cadastro. Tente novamente."
       );
     } finally {
       setLoading(false);
@@ -224,7 +234,6 @@ function WhatsAppModal({ curso, isOpen, onClose }: WhatsAppModalProps) {
   );
 }
 
-// Componente principal
 export default function CursosSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedCurso, setSelectedCurso] = useState<Curso | null>(null);

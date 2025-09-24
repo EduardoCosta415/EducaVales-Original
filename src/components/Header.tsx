@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+
 import {
   submitSubscription,
-  normalizePhone,
   toSafeNumber,
+  normalizePhone,
 } from "../../lib/api";
 
 type FormState = {
@@ -14,8 +15,20 @@ type FormState = {
   curso: string;
   name: string;
   whatsapp: string;
-  email: string; //API nao requisita e nem usa o email , mas fica a criterio caso haja um update no futuro
+  email: string; // opcional (a API não usa hoje)
 };
+
+// helper seguro para mensagem de erro
+function getErrorMessage(e: unknown): string {
+  if (e instanceof Error) return e.message;
+  if (typeof e === "string") return e;
+  if (e && typeof e === "object") {
+    const obj = e as Record<string, unknown>;
+    if (typeof obj.message === "string") return obj.message;
+    if (typeof obj.error === "string") return obj.error;
+  }
+  return "Ocorreu um erro inesperado.";
+}
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -66,14 +79,13 @@ export default function Header() {
     setStatusMessage("");
 
     try {
-      // Se o usuário escolheu pelo "curso", usamos como área de interesse
+      // área de interesse: preferir interestArea, senão o curso selecionado
       const areaOfInterest = (
         formData.interestArea ||
         formData.curso ||
         ""
       ).trim();
 
-      // enterpriseId vem das envs (helper tem um toSafeNumber também, mas usamos aqui por clareza)
       const enterpriseId = toSafeNumber(
         process.env.NEXT_PUBLIC_ENTERPRISE_ID,
         6
@@ -81,18 +93,17 @@ export default function Header() {
 
       const payload = {
         name: formData.name.trim(),
-        phone: normalizePhone(formData.whatsapp), // -> "55" + dígitos
+        phone: normalizePhone(formData.whatsapp),
         areaOfInterest,
         enterpriseId,
       };
 
-      // Dica: se quiser incluir o tipo de cadastro no texto:
+      // se quiser incluir o tipo de cadastro, descomente:
       // payload.areaOfInterest = `${areaOfInterest} (${formData.tipoCadastro})`;
 
       await submitSubscription(payload);
 
       setStatusMessage("Cadastro realizado com sucesso!");
-      // opcional: limpar campos
       setFormData((prev) => ({
         ...prev,
         interestArea: "",
@@ -101,10 +112,10 @@ export default function Header() {
         whatsapp: "",
         email: "",
       }));
-    } catch (err: any) {
-      console.error("Erro ao enviar:", err);
+    } catch (e: unknown) {
+      console.error("Erro ao enviar:", e);
       setStatusMessage(
-        err?.message || "Erro ao enviar o cadastro. Tente novamente."
+        getErrorMessage(e) || "Erro ao enviar o cadastro. Tente novamente."
       );
     } finally {
       setLoading(false);
@@ -146,14 +157,14 @@ export default function Header() {
                 className="text-gray-800 hover:text-orange-500 font-medium transition-colors relative group"
               >
                 Cursos
-                <span className="absolute -bottom-1 left-0 w-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
               </Link>
               <Link
                 href="/#depoimentos"
                 className="text-gray-800 hover:text-orange-500 font-medium transition-colors relative group"
               >
                 Depoimentos
-                <span className="absolute -bottom-1 left-0 w-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
               </Link>
 
               <div className="flex space-x-4 ml-4">
@@ -349,7 +360,7 @@ export default function Header() {
                 />
               </div>
 
-              {/* E-mail (opcional, não enviado nessa API) */}
+              {/* E-mail (opcional) */}
               <div>
                 <label className="block text-gray-700 font-medium mb-1">
                   E-mail (opcional)

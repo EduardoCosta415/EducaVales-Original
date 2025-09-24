@@ -7,7 +7,19 @@ import {
   submitSubscription,
   normalizePhone,
   toSafeNumber,
-} from "../../../lib/api";
+} from "../../../lib/api"; // <- ajuste se precisar
+
+// Helper seguro para extrair mensagem de erro sem usar `any`
+function getErrorMessage(e: unknown): string {
+  if (e instanceof Error) return e.message;
+  if (typeof e === "string") return e;
+  if (e && typeof e === "object") {
+    const obj = e as Record<string, unknown>;
+    if (typeof obj.message === "string") return obj.message;
+    if (typeof obj.error === "string") return obj.error;
+  }
+  return "Ocorreu um erro inesperado.";
+}
 
 export default function SaibaMais() {
   const [activeTab, setActiveTab] = useState(0);
@@ -139,7 +151,6 @@ export default function SaibaMais() {
       setStatusConsultor(
         "Solicitação enviada! Um consultor entrará em contato em breve."
       );
-      // opcional: limpar
       setFormData((prev) => ({
         ...prev,
         nome: "",
@@ -147,11 +158,11 @@ export default function SaibaMais() {
         telefone: "",
         cursoInteresse: "",
       }));
-      // opcional: fechar modal após alguns segundos
-      // setTimeout(() => setShowModalConsultor(false), 1200);
-    } catch (err: any) {
-      console.error("[consultor] erro:", err);
-      setStatusConsultor(err?.message || "Erro ao enviar. Tente novamente.");
+    } catch (e: unknown) {
+      console.error("[consultor] erro:", e);
+      setStatusConsultor(
+        getErrorMessage(e) || "Erro ao enviar. Tente novamente."
+      );
     } finally {
       setLoadingConsultor(false);
     }
@@ -187,11 +198,10 @@ export default function SaibaMais() {
         telefone: "",
         cursoInteresse: "",
       }));
-      // setTimeout(() => setShowModalInscricao(false), 1200);
-    } catch (err: any) {
-      console.error("[inscricao] erro:", err);
+    } catch (e: unknown) {
+      console.error("[inscricao] erro:", e);
       setStatusInscricao(
-        err?.message || "Erro ao enviar inscrição. Tente novamente."
+        getErrorMessage(e) || "Erro ao enviar inscrição. Tente novamente."
       );
     } finally {
       setLoadingInscricao(false);
@@ -347,7 +357,7 @@ export default function SaibaMais() {
               {depoimentos.map((depoimento, index) => (
                 <div
                   key={index}
-                  className="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                  className="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duração-300 transform hover:-translate-y-2"
                 >
                   <div className="text-4xl mb-4">{depoimento.avatar}</div>
                   <p className="text-gray-600 italic mb-4">
@@ -386,7 +396,7 @@ export default function SaibaMais() {
               </button>
               <button
                 onClick={downloadGradeCurricular}
-                className="border-2 border-white text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300"
+                className="border-2 border-white text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duração-300"
               >
                 Baixar Grade Curricular
               </button>
