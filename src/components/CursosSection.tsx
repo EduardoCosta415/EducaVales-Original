@@ -1,10 +1,13 @@
-// src/components/CursosSection.tsx
-'use client';
+"use client";
 
 import { cursos } from "@/data/cursosData";
 import { useState, useEffect, ChangeEvent } from "react";
+import {
+  submitSubscription,
+  normalizePhone,
+  toSafeNumber,
+} from "../../lib/api";
 
-// Tipagem do curso
 interface Curso {
   id: number;
   titulo: string;
@@ -13,13 +16,11 @@ interface Curso {
   conteudo?: string[];
 }
 
-// Props do card
 interface CourseCardProps {
   curso: Curso;
   onOpenModal: (curso: Curso) => void;
 }
 
-// Componente do card de curso
 function CourseCard({ curso, onOpenModal }: CourseCardProps) {
   const conteudo = curso.conteudo || [];
 
@@ -33,7 +34,9 @@ function CourseCard({ curso, onOpenModal }: CourseCardProps) {
       <div className="flex flex-col flex-grow p-6">
         <p className="text-gray-700 mb-6 leading-relaxed">{curso.descricao}</p>
 
-        <h4 className="font-semibold mb-3 text-orange-600">Você vai aprender:</h4>
+        <h4 className="font-semibold mb-3 text-orange-600">
+          Você vai aprender:
+        </h4>
         <ul className="text-gray-700 mb-6 space-y-2">
           {conteudo.slice(0, 3).map((item, index) => (
             <li key={index} className="flex items-start text-sm">
@@ -69,22 +72,22 @@ function CourseCard({ curso, onOpenModal }: CourseCardProps) {
             className="flex items-center gap-2 bg-green-500 text-white font-bold py-3 px-6 rounded-full hover:bg-green-600 transition-all duration-300 shadow-md"
           >
             WhatsApp
-            <svg
-              className="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 2a10 10 0 00-8.47 15.62L2 22l4.56-1.48A10 
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2a10 10 0 00-8.47 15.62L2 22l4.56-1.48A10 
               10 0 1012 2zm0 18a8 8 0 01-4.23-1.2l-.3-.19-2.71.88.9-2.64-.18-.31A8 
-              8 0 1112 20z"/>
-              <path d="M17 14.5c-.25-.12-1.47-.72-1.7-.8s-.4-.12-.57.12c-.17.25-.65.8-.8.97-.15.17-.3.2-.55.08a6.51 
+              8 0 1112 20z"
+              />
+              <path
+                d="M17 14.5c-.25-.12-1.47-.72-1.7-.8s-.4-.12-.57.12c-.17.25-.65.8-.8.97-.15.17-.3.2-.55.08a6.51 
               6.51 0 01-1.91-1.18 7.15 7.15 0 
               01-1.33-1.63c-.15-.25 0-.38.11-.5.11-.11.25-.29.38-.44.12-.15.17-.25.25-.42.08-.17.04-.32-.02-.44-.06-.12-.57-1.37-.78-1.87-.2-.48-.4-.42-.57-.43h-.48c-.15 
               0-.4.06-.61.29-.2.25-.8.78-.8 
               1.9s.82 2.21.94 2.36c.12.15 
               1.61 2.46 3.91 3.45.55.24.97.38 
               1.3.49.55.18 1.05.16 1.45.1.44-.06 
-              1.37-.56 1.57-1.1.2-.55.2-1.02.15-1.12-.06-.1-.23-.16-.48-.28z"/>
+              1.37-.56 1.57-1.1.2-.55.2-1.02.15-1.12-.06-.1-.23-.16-.48-.28z"
+              />
             </svg>
           </button>
         </div>
@@ -93,16 +96,16 @@ function CourseCard({ curso, onOpenModal }: CourseCardProps) {
   );
 }
 
-// Props do modal
 interface WhatsAppModalProps {
   curso: Curso | null;
   isOpen: boolean;
   onClose: () => void;
 }
 
-// Modal de WhatsApp
 function WhatsAppModal({ curso, isOpen, onClose }: WhatsAppModalProps) {
   const [form, setForm] = useState({ nome: "", telefone: "", email: "" });
+  const [loading, setLoading] = useState(false);
+  const [statusMsg, setStatusMsg] = useState<string>("");
 
   if (!isOpen || !curso) return null;
 
@@ -110,16 +113,47 @@ function WhatsAppModal({ curso, isOpen, onClose }: WhatsAppModalProps) {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    setStatusMsg("");
+
     if (!form.nome || !form.telefone || !form.email) {
-      alert("Preencha todos os campos!");
+      setStatusMsg("Preencha todos os campos!");
       return;
     }
 
-    const mensagem = `Olá! Meu nome é ${form.nome}, meu telefone é ${form.telefone}, meu e-mail é ${form.email}. Tenho interesse no curso: ${curso.titulo} (R$ ${curso.preco})`;
-    const url = `https://wa.me/5531996636957?text=${encodeURIComponent(mensagem)}`;
-    window.open(url, "_blank");
-    onClose();
+    //Montagem da API
+    const areaOfInterest = curso.titulo;
+    const enterpriseId = toSafeNumber(process.env.NEXT_PUBLIC_ENTERPRISE_ID, 1);
+
+    const payload = {
+      name: form.nome.trim(),
+      phone: normalizePhone(form.telefone),
+      areaOfInterest,
+      enterpriseId,
+    };
+
+    try {
+      setLoading(true);
+      await submitSubscription(payload);
+
+      setStatusMsg("Cadastro enviado com sucesso! Abrindo WhatsApp...");
+      // Mensagem para o WhatsApp
+      const mensagem = `Olá! Meu nome é ${form.nome}, meu telefone é ${form.telefone}, meu e-mail é ${form.email}. Tenho interesse no curso: ${curso.titulo} (R$ ${curso.preco})`;
+      const url = `https://wa.me/5531996636957?text=${encodeURIComponent(
+        mensagem
+      )}`;
+
+      // Abre WhatsApp e fecha modal
+      window.open(url, "_blank");
+      onClose();
+    } catch (err: any) {
+      console.error("Erro ao criar lead:", err);
+      setStatusMsg(
+        err?.message || "Erro ao enviar o cadastro. Tente novamente."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -135,6 +169,8 @@ function WhatsAppModal({ curso, isOpen, onClose }: WhatsAppModalProps) {
           placeholder="Seu nome"
           className="w-full mb-3 p-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none text-black placeholder:text-black"
           onChange={handleChange}
+          value={form.nome}
+          disabled={loading}
         />
         <input
           type="tel"
@@ -142,6 +178,8 @@ function WhatsAppModal({ curso, isOpen, onClose }: WhatsAppModalProps) {
           placeholder="Seu telefone"
           className="w-full mb-3 p-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none text-black placeholder:text-black"
           onChange={handleChange}
+          value={form.telefone}
+          disabled={loading}
         />
         <input
           type="email"
@@ -149,20 +187,36 @@ function WhatsAppModal({ curso, isOpen, onClose }: WhatsAppModalProps) {
           placeholder="Seu e-mail"
           className="w-full mb-3 p-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none text-black placeholder:text-black"
           onChange={handleChange}
+          value={form.email}
+          disabled={loading}
         />
+
+        {statusMsg && (
+          <p
+            className={`mt-1 text-sm ${
+              statusMsg.toLowerCase().includes("sucesso")
+                ? "text-green-600"
+                : "text-red-600"
+            }`}
+          >
+            {statusMsg}
+          </p>
+        )}
 
         <div className="flex justify-between mt-4 gap-3">
           <button
             onClick={onClose}
-            className="flex-1 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300"
+            className="flex-1 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300 disabled:opacity-60"
+            disabled={loading}
           >
             Cancelar
           </button>
           <button
             onClick={handleSubmit}
-            className="flex-1 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600"
+            className="flex-1 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 disabled:opacity-60"
+            disabled={loading}
           >
-            Enviar para WhatsApp
+            {loading ? "Enviando..." : "Enviar para WhatsApp"}
           </button>
         </div>
       </div>
@@ -180,13 +234,23 @@ export default function CursosSection() {
   }, []);
 
   return (
-    <section id="cursos" className="py-16 bg-gradient-to-b from-white to-orange-50">
+    <section
+      id="cursos"
+      className="py-16 bg-gradient-to-b from-white to-orange-50"
+    >
       <div className="container mx-auto px-4">
-        <div className={`text-center mb-16 transition-opacity duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
-          <h2 className="text-4xl font-bold text-orange-600 mb-4">Nossos Cursos Técnicos</h2>
+        <div
+          className={`text-center mb-16 transition-opacity duration-700 ${
+            isVisible ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <h2 className="text-4xl font-bold text-orange-600 mb-4">
+            Nossos Cursos Técnicos
+          </h2>
           <div className="w-20 h-1 bg-orange-500 mx-auto mb-6"></div>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Escolha entre nossos cursos especializados e desenvolva as habilidades mais demandadas pelo mercado de trabalho.
+            Escolha entre nossos cursos especializados e desenvolva as
+            habilidades mais demandadas pelo mercado de trabalho.
           </p>
         </div>
 
@@ -194,7 +258,11 @@ export default function CursosSection() {
           {cursos.slice(0, 6).map((curso, index) => (
             <div
               key={curso.id}
-              className={`h-full transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-5"}`}
+              className={`h-full transition-all duration-500 ${
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-5"
+              }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <CourseCard curso={curso} onOpenModal={setSelectedCurso} />
