@@ -111,12 +111,12 @@ export default function SaibaMais() {
   ];
 
   const cursos = [
-    { nome: "Enfermagem", cargaHoraria: "70h" },
-    { nome: "Análise e Desenvolvimento de Sistemas", cargaHoraria: "80h" },
-    { nome: "Administração", cargaHoraria: "60h" },
-    { nome: "Gestão Comercial", cargaHoraria: "65h" },
-    { nome: "Psicologia", cargaHoraria: "75h" },
-    { nome: "Engenharia Civil", cargaHoraria: "85h" },
+    { nome: "Segurança do Trabalho", cargaHoraria: "70h" },
+    { nome: "Curso de Edificações", cargaHoraria: "80h" },
+    { nome: "Transações Imobiliarias", cargaHoraria: "60h" },
+    { nome: "Enfermagem", cargaHoraria: "65h" },
+    { nome: "Técnico Marketing", cargaHoraria: "75h" },
+    { nome: "Técnico Logistica", cargaHoraria: "85h" },
   ];
 
   const handleInputChange = (
