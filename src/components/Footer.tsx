@@ -1,6 +1,6 @@
 'use client';
 import { useState, MouseEvent } from "react";
-import Image from "next/image"; // ✅ substitui <img>
+import Image from "next/image";
 
 type ModalType = "privacidade" | "termos" | null;
 
@@ -169,17 +169,136 @@ export default function Footer() {
             </button>
 
             {openModal === "privacidade" && (
-              <>
-                <h2 className="text-xl font-bold mb-4 text-white">Política de Privacidade</h2>
-                <p className="mb-2">A sua privacidade é importante...</p>
-              </>
+              <div className="space-y-4">
+                <h2 className="text-2xl font-bold mb-6 text-white">Política de Privacidade</h2>
+                
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">1. Coleta de Informações</h3>
+                  <p>Coletamos informações pessoais quando você se cadastra em nossa plataforma, preenche formulários, realiza matrículas ou interage conosco. As informações podem incluir:</p>
+                  <ul className="list-disc list-inside ml-4 space-y-1">
+                    <li>Nome completo e dados de contato</li>
+                    <li>Informações de pagamento e cobrança</li>
+                    <li>Dados acadêmicos e profissionais</li>
+                    <li>Histórico de navegação e interações</li>
+                  </ul>
+                </section>
+
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">2. Uso das Informações</h3>
+                  <p>Utilizamos suas informações para:</p>
+                  <ul className="list-disc list-inside ml-4 space-y-1">
+                    <li>Processar matrículas e pagamentos</li>
+                    <li>Fornecer suporte técnico e acadêmico</li>
+                    <li>Personalizar sua experiência de aprendizado</li>
+                    <li>Enviar comunicados importantes sobre cursos</li>
+                    <li>Melhorar nossos serviços e plataforma</li>
+                  </ul>
+                </section>
+
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">3. Compartilhamento de Dados</h3>
+                  <p>Não compartilhamos seus dados pessoais com terceiros, exceto quando necessário para:</p>
+                  <ul className="list-disc list-inside ml-4 space-y-1">
+                    <li>Processamento de pagamentos através de gateways seguros</li>
+                    <li>Cumprimento de obrigações legais</li>
+                    <li>Parcerias educacionais autorizadas previamente</li>
+                  </ul>
+                </section>
+
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">4. Segurança</h3>
+                  <p>Implementamos medidas de segurança técnicas e administrativas para proteger suas informações contra acesso não autorizado, alteração, divulgação ou destruição.</p>
+                </section>
+
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">5. Seus Direitos</h3>
+                  <p>Você tem direito a:</p>
+                  <ul className="list-disc list-inside ml-4 space-y-1">
+                    <li>Acessar e corrigir seus dados pessoais</li>
+                    <li>Solicitar a exclusão de suas informações</li>
+                    <li>Revogar consentimentos a qualquer momento</li>
+                    <li>Opor-se ao processamento de dados</li>
+                  </ul>
+                </section>
+
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">6. Contato</h3>
+                  <p>Para questões sobre privacidade, entre em contato através do e-mail: <span className="text-orange-500">privacidade@educavalestec.com</span></p>
+                </section>
+
+                <p className="text-sm text-gray-400 mt-6">Última atualização: Janeiro de 2024</p>
+              </div>
             )}
 
             {openModal === "termos" && (
-              <>
-                <h2 className="text-xl font-bold mb-4 text-white">Termos de Uso</h2>
-                <p className="mb-2">Estes Termos de Uso regulam o acesso...</p>
-              </>
+              <div className="space-y-4">
+                <h2 className="text-2xl font-bold mb-6 text-white">Termos de Uso</h2>
+                
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">1. Aceitação dos Termos</h3>
+                  <p>Ao acessar e utilizar a plataforma EducaValesTec, você concorda em cumprir estes Termos de Uso e nossa Política de Privacidade.</p>
+                </section>
+
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">2. Cadastro e Conta</h3>
+                  <p>Para utilizar nossos serviços, você deve:</p>
+                  <ul className="list-disc list-inside ml-4 space-y-1">
+                    <li>Fornecer informações verdadeiras e atualizadas</li>
+                    <li>Manter a confidencialidade de sua senha</li>
+                    <li>Ser maior de 18 anos ou ter autorização parental</li>
+                    <li>Notificar-nos imediatamente sobre uso não autorizado</li>
+                  </ul>
+                </section>
+
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">3. Conduta do Usuário</h3>
+                  <p>É proibido:</p>
+                  <ul className="list-disc list-inside ml-4 space-y-1">
+                    <li>Utilizar a plataforma para atividades ilegais</li>
+                    <li>Compartilhar conteúdo ofensivo ou discriminatório</li>
+                    <li>Tentar acessar áreas restritas do sistema</li>
+                    <li>Realizar atividades que comprometam a segurança</li>
+                    <li>Reproduzir ou distribuir materiais do curso sem autorização</li>
+                  </ul>
+                </section>
+
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">4. Propriedade Intelectual</h3>
+                  <p>Todo o conteúdo disponibilizado na plataforma, incluindo vídeos, materiais didáticos, textos e software, é propriedade da EducaValesTec ou de seus licenciantes e está protegido por leis de direitos autorais.</p>
+                </section>
+
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">5. Pagamentos e Reembolsos</h3>
+                  <ul className="list-disc list-inside ml-4 space-y-1">
+                    <li>Os valores dos cursos são divulgados no momento da matrícula</li>
+                    <li>Pagamentos são processados através de gateways seguros</li>
+                    <li>Política de reembolso segue as normas do Código de Defesa do Consumidor</li>
+                    <li>Cancelamentos devem ser solicitados por escrito</li>
+                  </ul>
+                </section>
+
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">6. Limitação de Responsabilidade</h3>
+                  <p>A EducaValesTec não se responsabiliza por:</p>
+                  <ul className="list-disc list-inside ml-4 space-y-1">
+                    <li>Danos resultantes de uso inadequado da plataforma</li>
+                    <li>Interrupções temporárias por manutenção técnica</li>
+                    <li>Conteúdo de sites externos vinculados à nossa plataforma</li>
+                  </ul>
+                </section>
+
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">7. Modificações nos Termos</h3>
+                  <p>Reservamo-nos o direito de modificar estes Termos a qualquer momento. Alterações significativas serão comunicadas com antecedência.</p>
+                </section>
+
+                <section className="space-y-3">
+                  <h3 className="text-lg font-semibold text-orange-500">8. Lei Aplicável</h3>
+                  <p>Estes Termos são regidos pelas leis brasileiras. Eventuais disputas serão resolvidas no foro da comarca de Coronel Fabriciano - MG.</p>
+                </section>
+
+                <p className="text-sm text-gray-400 mt-6">Última atualização: Janeiro de 2024</p>
+              </div>
             )}
           </div>
         </div>
