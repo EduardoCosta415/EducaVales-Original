@@ -150,7 +150,7 @@ function WhatsAppModal({ curso, isOpen, onClose }: WhatsAppModalProps) {
 
       setStatusMsg("Cadastro enviado com sucesso! Abrindo WhatsApp...");
       const mensagem = `Olá! Meu nome é ${form.nome}, meu telefone é ${form.telefone}, meu e-mail é ${form.email}. Tenho interesse no curso: ${curso.titulo} (R$ ${curso.preco})`;
-      const url = `https://wa.me/5531996636957?text=${encodeURIComponent(
+      const url = `https://wa.me/5531972608298?text=${encodeURIComponent(
         mensagem
       )}`;
 

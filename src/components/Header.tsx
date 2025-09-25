@@ -128,14 +128,14 @@ export default function Header() {
         <div className="container mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <Link
-              href="/"
-              className="text-2xl font-bold text-orange-500 hover:text-orange-600 transition-colors flex items-center"
-            >
-              <span className="mr-1">🎓</span>
-              EducaValesTec
-            </Link>
-
+                    <Link href="/" className="text-2xl font-bold text-orange-500 hover:text-orange-600 transition-colors flex items-center" >
+                <img 
+                  src="/tec01.jpg" 
+                  alt="EducaValesTec"
+                  className="h-14 w-36 mr-3 object-contain" /* 56px - máximo recomendado */
+                />
+               
+              </Link>
             {/* Menu Desktop */}
             <nav className="hidden lg:flex items-center space-x-8">
               <Link

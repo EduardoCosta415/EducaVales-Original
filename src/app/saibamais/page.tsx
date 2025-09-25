@@ -235,11 +235,11 @@ export default function SaibaMais() {
 
   return (
     <>
-      <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <main className="min-h-screen bg-gradient-to-b from-black to-gray-900">
         {/* Hero */}
-        <section className="relative bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
+        <section className="relative bg-gradient-to-r from-gray-900 via-orange-600 to-gray-800 text-white py-20">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 transform transition-transform duration-700 ease-out">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 transform transition-transform duration-700 ease-out text-white">
               Educação que Transforma sua Carreira
             </h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90">
@@ -248,7 +248,7 @@ export default function SaibaMais() {
             </p>
             <button
               onClick={() => setShowModalInscricao(true)}
-              className="bg-white text-blue-600 px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 "
+              className="bg-orange-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
               Quero Me Inscrever
             </button>
@@ -256,9 +256,9 @@ export default function SaibaMais() {
         </section>
 
         {/* Benefícios com Abas Interativas */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-gray-900">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
               Vantagens Exclusivas da Nossa Metodologia
             </h2>
 
@@ -271,8 +271,8 @@ export default function SaibaMais() {
                     onClick={() => setActiveTab(index)}
                     className={`w-full text-left p-6 rounded-xl transition-all duration-300 ${
                       activeTab === index
-                        ? "bg-blue-600 text-white shadow-lg transform scale-105"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        ? "bg-orange-500 text-white shadow-lg transform scale-105 border-2 border-orange-400"
+                        : "bg-gray-800 text-gray-200 hover:bg-gray-700 border-2 border-gray-700"
                     }`}
                   >
                     <div className="flex items-center space-x-4">
@@ -286,21 +286,21 @@ export default function SaibaMais() {
               </div>
 
               {/* Conteúdo da Aba */}
-              <div className="bg-gray-50 p-8 rounded-xl shadow-lg">
+              <div className="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700">
                 <div className="animate-fade-in">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                  <h3 className="text-2xl font-bold text-white mb-4 flex items-center">
                     <span className="text-3xl mr-3">
                       {beneficios[activeTab].icone}
                     </span>
                     {beneficios[activeTab].titulo}
                   </h3>
-                  <p className="text-gray-600 text-lg mb-6">
+                  <p className="text-gray-300 text-lg mb-6">
                     {beneficios[activeTab].descricao}
                   </p>
                   <ul className="space-y-3">
                     {beneficios[activeTab].detalhes.map((detalhe, idx) => (
-                      <li key={idx} className="flex items-center text-gray-700">
-                        <span className="text-green-500 mr-2">✓</span>
+                      <li key={idx} className="flex items-center text-gray-200">
+                        <span className="text-orange-400 mr-2">✓</span>
                         {detalhe}
                       </li>
                     ))}
@@ -312,19 +312,19 @@ export default function SaibaMais() {
         </section>
 
         {/* Números */}
-        <section className="py-16 bg-blue-600 text-white">
+        <section className="py-16 bg-orange-600 text-white">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div className="animate-bounce-in">
                 <div className="text-4xl md:text-6xl font-bold mb-2">92%</div>
-                <div className="text-blue-200">Empregabilidade</div>
+                <div className="text-orange-200">Empregabilidade</div>
               </div>
               <div
                 className="animate-bounce-in"
                 style={{ animationDelay: "0.2s" }}
               >
                 <div className="text-4xl md:text-6xl font-bold mb-2">18-24</div>
-                <div className="text-blue-200">Meses de Duração</div>
+                <div className="text-orange-200">Meses de Duração</div>
               </div>
               <div
                 className="animate-bounce-in"
@@ -333,23 +333,23 @@ export default function SaibaMais() {
                 <div className="text-4xl md:text-6xl font-bold mb-2">
                   R$ 3.5k
                 </div>
-                <div className="text-blue-200">Salário Inicial Médio</div>
+                <div className="text-orange-200">Salário Inicial Médio</div>
               </div>
               <div
                 className="animate-bounce-in"
                 style={{ animationDelay: "0.6s" }}
               >
                 <div className="text-4xl md:text-6xl font-bold mb-2">1000+</div>
-                <div className="text-blue-200">Empresas Parceiras</div>
+                <div className="text-orange-200">Empresas Parceiras</div>
               </div>
             </div>
           </div>
         </section>
 
         {/* Depoimentos */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-gray-900">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
               Quem Fez, Recomenda!
             </h2>
 
@@ -357,17 +357,17 @@ export default function SaibaMais() {
               {depoimentos.map((depoimento, index) => (
                 <div
                   key={index}
-                  className="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duração-300 transform hover:-translate-y-2"
+                  className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-700"
                 >
                   <div className="text-4xl mb-4">{depoimento.avatar}</div>
-                  <p className="text-gray-600 italic mb-4">
+                  <p className="text-gray-300 italic mb-4">
                     {depoimento.texto}
                   </p>
-                  <div className="border-t pt-4">
-                    <div className="font-bold text-gray-800">
+                  <div className="border-t border-gray-600 pt-4">
+                    <div className="font-bold text-white">
                       {depoimento.nome}
                     </div>
-                    <div className="text-blue-600 text-sm">
+                    <div className="text-orange-400 text-sm">
                       {depoimento.curso}
                     </div>
                   </div>
@@ -378,7 +378,7 @@ export default function SaibaMais() {
         </section>
 
         {/* CTA Final */}
-        <section className="py-16 bg-gradient-to-r from-green-500 to-blue-600 text-white">
+        <section className="py-16 bg-gradient-to-r from-orange-600 to-gray-900 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Pronto para Transformar sua Carreira?
@@ -390,13 +390,13 @@ export default function SaibaMais() {
             <div className="space-y-4 md:space-y-0 md:space-x-4">
               <button
                 onClick={() => setShowModalConsultor(true)}
-                className="bg-white text-blue-600 px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-50 transition-all duration-300"
+                className="bg-white text-orange-600 px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg"
               >
                 Falar com um Consultor
               </button>
               <button
                 onClick={downloadGradeCurricular}
-                className="border-2 border-white text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duração-300"
+                className="border-2 border-white text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 shadow-lg"
               >
                 Baixar Grade Curricular
               </button>
@@ -410,14 +410,14 @@ export default function SaibaMais() {
       {/* Modal Falar com Consultor */}
       {showModalConsultor && (
         <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-md w-full p-6 animate-modal-in">
+          <div className="bg-gray-900 rounded-lg max-w-md w-full p-6 animate-modal-in border border-orange-500">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-gray-800">
+              <h3 className="text-xl font-bold text-white">
                 Fale com um Consultor
               </h3>
               <button
                 onClick={() => setShowModalConsultor(false)}
-                className="text-black hover:text-gray-700"
+                className="text-orange-400 hover:text-orange-300 text-xl"
               >
                 ✕
               </button>
@@ -425,7 +425,7 @@ export default function SaibaMais() {
             <form onSubmit={handleSubmitConsultor}>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-black mb-1">
+                  <label className="block text-sm font-medium text-orange-300 mb-1">
                     Nome Completo
                   </label>
                   <input
@@ -434,12 +434,12 @@ export default function SaibaMais() {
                     placeholder="Nome"
                     value={formData.nome}
                     onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300  rounded-md text-black"
+                    className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-orange-300 mb-1">
                     E-mail
                   </label>
                   <input
@@ -448,11 +448,11 @@ export default function SaibaMais() {
                     placeholder="Email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 text-black rounded-md"
+                    className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-orange-300 mb-1">
                     Telefone
                   </label>
                   <input
@@ -461,24 +461,24 @@ export default function SaibaMais() {
                     placeholder="Telefone"
                     value={formData.telefone}
                     onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300  text-black rounded-md"
+                    className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-orange-300 mb-1">
                     Curso de Interesse
                   </label>
                   <select
                     name="cursoInteresse"
                     value={formData.cursoInteresse}
                     onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 text-black rounded-md"
+                    className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                     required
                   >
-                    <option value="">Selecione um curso</option>
+                    <option value="" className="bg-gray-800">Selecione um curso</option>
                     {cursos.map((curso, index) => (
-                      <option key={index} value={curso.nome}>
+                      <option key={index} value={curso.nome} className="bg-gray-800">
                         {curso.nome}
                       </option>
                     ))}
@@ -490,8 +490,8 @@ export default function SaibaMais() {
                     className={`text-sm ${
                       statusConsultor.toLowerCase().includes("sucesso") ||
                       statusConsultor.toLowerCase().includes("enviada")
-                        ? "text-green-600"
-                        : "text-red-600"
+                        ? "text-green-400"
+                        : "text-red-400"
                     }`}
                   >
                     {statusConsultor}
@@ -501,10 +501,10 @@ export default function SaibaMais() {
                 <button
                   type="submit"
                   disabled={loadingConsultor}
-                  className={`w-full text-white py-2 rounded-md transition-colors ${
+                  className={`w-full text-white py-2 rounded-md transition-colors font-bold ${
                     loadingConsultor
-                      ? "bg-gray-400"
-                      : "bg-blue-600 hover:bg-blue-700"
+                      ? "bg-gray-600 cursor-not-allowed"
+                      : "bg-orange-500 hover:bg-orange-600"
                   }`}
                 >
                   {loadingConsultor ? "Enviando..." : "Solicitar Contato"}
@@ -518,14 +518,14 @@ export default function SaibaMais() {
       {/* Modal Quero Me Inscrever */}
       {showModalInscricao && (
         <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-md w-full p-6 animate-modal-in">
+          <div className="bg-gray-900 rounded-lg max-w-md w-full p-6 animate-modal-in border border-orange-500">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-gray-800">
+              <h3 className="text-xl font-bold text-white">
                 Inscreva-se Agora
               </h3>
               <button
                 onClick={() => setShowModalInscricao(false)}
-                className="text-black hover:text-gray-700"
+                className="text-orange-400 hover:text-orange-300 text-xl"
               >
                 ✕
               </button>
@@ -533,7 +533,7 @@ export default function SaibaMais() {
             <form onSubmit={handleSubmitInscricao}>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-orange-300 mb-1">
                     Nome Completo
                   </label>
                   <input
@@ -542,12 +542,12 @@ export default function SaibaMais() {
                     name="nome"
                     value={formData.nome}
                     onChange={handleInputChange}
-                    className="w-full p-2 border text-black border-gray-300 rounded-md"
+                    className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-orange-300 mb-1">
                     E-mail
                   </label>
                   <input
@@ -556,11 +556,11 @@ export default function SaibaMais() {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full p-2 border text-black border-gray-300 rounded-md"
+                    className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-orange-300 mb-1">
                     Telefone
                   </label>
                   <input
@@ -569,24 +569,24 @@ export default function SaibaMais() {
                     name="telefone"
                     value={formData.telefone}
                     onChange={handleInputChange}
-                    className="w-full p-2 border text-black border-gray-300 rounded-md"
+                    className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-orange-300 mb-1">
                     Curso de Interesse
                   </label>
                   <select
                     name="cursoInteresse"
                     value={formData.cursoInteresse}
                     onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 text-black rounded-md"
+                    className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                     required
                   >
-                    <option value="">Selecione um curso</option>
+                    <option value="" className="bg-gray-800">Selecione um curso</option>
                     {cursos.map((curso, index) => (
-                      <option key={index} value={curso.nome}>
+                      <option key={index} value={curso.nome} className="bg-gray-800">
                         {curso.nome}
                       </option>
                     ))}
@@ -597,8 +597,8 @@ export default function SaibaMais() {
                   <p
                     className={`text-sm ${
                       statusInscricao.toLowerCase().includes("sucesso")
-                        ? "text-green-600"
-                        : "text-red-600"
+                        ? "text-green-400"
+                        : "text-red-400"
                     }`}
                   >
                     {statusInscricao}
@@ -608,10 +608,10 @@ export default function SaibaMais() {
                 <button
                   type="submit"
                   disabled={loadingInscricao}
-                  className={`w-full text-white py-2 rounded-md transition-colors ${
+                  className={`w-full text-white py-2 rounded-md transition-colors font-bold ${
                     loadingInscricao
-                      ? "bg-gray-400"
-                      : "bg-green-600 hover:bg-green-700"
+                      ? "bg-gray-600 cursor-not-allowed"
+                      : "bg-orange-500 hover:bg-orange-600"
                   }`}
                 >
                   {loadingInscricao ? "Enviando..." : "Finalizar Inscrição"}
