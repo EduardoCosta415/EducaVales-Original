@@ -4,11 +4,11 @@ export default function Sobre() {
       <div className="container mx-auto px-6 py-16">
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-orange-500">
-            Sobre a EducaValestec
+            Sobre a EDUCAVALESTEC
           </h1>
 
           <p className="text-lg md:text-xl text-gray-700 mb-12 leading-relaxed">
-            Somos uma plataforma educacional inovadora, dedicada a formar os melhores
+            Instituição educacional inovadora, dedicada a formar os melhores
             profissionais de tecnologia do mercado. Nossa missão é transformar vidas por meio
             da educação de qualidade, acessível e focada nas demandas do mundo real.
           </p>
@@ -42,11 +42,12 @@ export default function Sobre() {
           <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-900">
             Nossa Experiência
           </h2>
-          <p className="text-gray-700 text-lg leading-relaxed">
-            Com mais de <span className="font-bold text-orange-500">2 anos de experiência</span> no mercado,
-            já formamos milhares de profissionais que hoje atuam em empresas de destaque no Brasil
-            e no mundo.
-          </p>
+         <p className="text-gray-700 text-lg leading-relaxed">
+  Já acumulamos{" "}
+  <span className="font-bold text-orange-500">resultados consistentes</span>, 
+  formando diversos profissionais que hoje aplicam seus conhecimentos em 
+  empresas de destaque no Brasil.
+</p>
         </div>
 
         {/* Parceiros */}
@@ -64,21 +65,21 @@ export default function Sobre() {
                 ></img>
                 <span className="text-gray-500"></span>
               </div>
-              <p className="text-lg font-medium text-gray-800">Prefeitura</p>
+              <p className="text-sm font-medium text-gray-800">Prefeitura de Coronel Fabriciano</p>
             </div>
 
             <div className="flex flex-col items-center bg-white p-6 rounded-2xl shadow-lg">
               <div className="w-32 h-32 bg-gray-200 rounded-full mb-4 flex items-center justify-center">
                 {/* Espaço reservado para imagem */}
                 <img
-                src="csfx.jpg"
+                src="fsfx.jpg"
                 alt="Prefeitura"
                 className="w-full h-full object-contain rounded-full"
                 ></img>
 
                 <span className="text-gray-500"></span>
               </div>
-              <p className="text-lg font-medium text-gray-800">Colegio CSFX</p>
+              <p className="text-sm font-medium text-black">Hospital FSFX</p>
             </div>
           </div>
         </div>

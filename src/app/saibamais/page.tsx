@@ -39,73 +39,73 @@ export default function SaibaMais() {
     cursoInteresse: "",
   });
 
-  const beneficios = [
-    {
-      titulo: "Aprendizado Prático",
-      icone: "🎯",
-      descricao:
-        "Você aprende fazendo! Desenvolve habilidades reais que pode aplicar imediatamente no mercado de trabalho.",
-      detalhes: [
-        "Projetos baseados em situações reais do mercado",
-        "Laboratórios equipados com tecnologia atual",
-        "Metodologia learning by doing",
-      ],
-    },
-    {
-      titulo: "Flexibilidade",
-      icone: "⏱️",
-      descricao:
-        "Estude no seu ritmo! Reconhecemos suas experiências anteriores e adaptamos seu plano de estudos.",
-      detalhes: [
-        "Reconhecimento de conhecimentos prévios",
-        "Horários flexíveis",
-        "Possibilidade de acelerar sua formação",
-      ],
-    },
-    {
-      titulo: "Empregabilidade",
-      icone: "💼",
-      descricao:
-        "Saia pronto para o mercado! Foco direto nas competências que as empresas realmente buscam.",
-      detalhes: [
-        "Contato com empresas desde o primeiro semestre",
-        "Portfólio de competências reconhecido pelo mercado",
-        "Taxa de empregabilidade acima de 85%",
-      ],
-    },
-    {
-      titulo: "Custo-Benefício",
-      icone: "💰",
-      descricao:
-        "Investimento inteligente! Formação rápida e focada, com retorno garantido em pouco tempo.",
-      detalhes: [
-        "Duração menor que cursos tradicionais",
-        "Mensalidades acessíveis",
-        "Retorno do investimento em média em 6 meses",
-      ],
-    },
-  ];
+const beneficios = [ 
+  {
+    titulo: "Aprendizado Prático",
+    icone: "🎯",
+    descricao:
+      "Você aprende fazendo! Desenvolve habilidades reais que pode aplicar imediatamente no mercado de trabalho.",
+    detalhes: [
+      "Projetos baseados em situações reais",
+      
+      "Metodologia voltada para prática profissional",
+    ],
+  },
+  {
+    titulo: "Flexibilidade",
+    icone: "⏱️",
+    descricao:
+      "Estude no seu ritmo! Reconhecemos suas experiências e adaptamos o curso às suas necessidades.",
+    detalhes: [
+      "Reconhecimento de conhecimentos prévios",
+      "Opções de horários online",
+   
+    ],
+  },
+  {
+    titulo: "Empregabilidade",
+    icone: "💼",
+    descricao:
+      "Foco direto no mercado! Você adquire as competências que as empresas realmente procuram.",
+    detalhes: [
+      "Parcerias com empresas e programas de estágio",
+      "Certificação valorizada no mercado",
+      "Alta taxa de inserção profissional",
+    ],
+  },
+  {
+    titulo: "Custo-Benefício",
+    icone: "💰",
+    descricao:
+      "Formação acessível e estratégica! Cursos de curta ou média duração, com retorno rápido no mercado.",
+    detalhes: [
+      "Mensalidades que cabem no bolso",
+      "Tempo de formação menor que cursos tradicionais",
+      
+    ],
+  },
+];
 
   const depoimentos = [
     {
       nome: "Ana Silva",
-      curso: "Análise e Desenvolvimento de Sistemas",
+      curso: "Marketing",
       texto:
-        "Em 1 ano já estava trabalhando na área! A metodologia por competências fez toda a diferença.",
+        "Em 1 ano já estava trabalhando na área! A metodologia fez toda a diferença.",
       avatar: "👩‍💻",
     },
     {
       nome: "Carlos Santos",
-      curso: "Gestão Comercial",
+      curso: "Logistica",
       texto:
-        "Reconheceram minha experiência como vendedor e pude me formar em menos tempo!",
+        "Muito válida a experiência que tive na instituição. Cada dia foi um novo aprendizado. Sou muito grato!!!",
       avatar: "👨‍💼",
     },
     {
       nome: "Marina Costa",
       curso: "Enfermagem",
       texto:
-        "A parte prática me preparou tão bem que fui contratada ainda durante o estágio!",
+        "A instituição me preparou tão bem, que ao sair do curso ja estava empregada!",
       avatar: "👩‍⚕️",
     },
   ];
@@ -243,7 +243,7 @@ export default function SaibaMais() {
               Educação que Transforma sua Carreira
             </h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90">
-              Descubra por que a formação por competências é o caminho mais
+              Descubra por que a formação é o caminho mais
               inteligente para o sucesso profissional
             </p>
             <button

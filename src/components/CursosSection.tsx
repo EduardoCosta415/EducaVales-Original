@@ -13,6 +13,9 @@ interface Curso {
   titulo: string;
   descricao: string;
   preco: string;
+  precoOriginal?: string;
+  desconto?: string;
+  destaque?: string;
   conteudo?: string[];
 }
 
@@ -21,7 +24,7 @@ interface CourseCardProps {
   onOpenModal: (curso: Curso) => void;
 }
 
-/** Helper p/ extrair mensagem sem usar `any` */
+/** Helper para extrair mensagens de erro */
 function getErrorMessage(e: unknown): string {
   if (e instanceof Error) return e.message;
   if (typeof e === "string") return e;
@@ -35,11 +38,16 @@ function getErrorMessage(e: unknown): string {
 
 function CourseCard({ curso, onOpenModal }: CourseCardProps) {
   const conteudo = curso.conteudo || [];
+  const conteudoPreview =
+    conteudo.length > 0 ? [...conteudo.slice(0, 3), "…e muito mais!"] : [];
 
   return (
     <div className="flex flex-col h-full bg-white rounded-xl shadow-lg border border-orange-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-orange-300">
       <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-5 rounded-t-xl">
         <h3 className="text-xl font-bold">{curso.titulo}</h3>
+        {curso.destaque && (
+          <p className="text-sm font-semibold mt-1">{curso.destaque}</p>
+        )}
         <div className="w-12 h-1 bg-white mt-2 rounded-full"></div>
       </div>
 
@@ -50,7 +58,7 @@ function CourseCard({ curso, onOpenModal }: CourseCardProps) {
           Você vai aprender:
         </h4>
         <ul className="text-gray-700 mb-6 space-y-2">
-          {conteudo.slice(0, 3).map((item, index) => (
+          {conteudoPreview.map((item, index) => (
             <li key={index} className="flex items-start text-sm">
               <svg
                 className="w-5 h-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0"
@@ -72,8 +80,25 @@ function CourseCard({ curso, onOpenModal }: CourseCardProps) {
         </ul>
 
         <div className="mt-auto pt-5 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-2xl font-bold text-orange-600 text-center sm:text-left">
-            R$ {curso.preco}
+          <div className="text-center sm:text-left">
+            {/* Se houver preço original e desconto */}
+            {curso.precoOriginal && curso.desconto && (
+              <p className="text-sm text-gray-500 line-through">
+                De R$ {curso.precoOriginal}
+              </p>
+            )}
+
+            <div className="text-2xl font-bold text-orange-600">
+              R$ {curso.preco}
+            </div>
+
+            {/* Badge de desconto */}
+            {curso.desconto && (
+              <span className="inline-block bg-green-100 text-green-600 text-xs font-semibold px-2 py-1 rounded-full mt-1">
+                {curso.desconto} OFF
+              </span>
+            )}
+
             <span className="text-sm font-normal text-gray-500 block">
               À vista ou parcelado
             </span>
@@ -133,7 +158,6 @@ function WhatsAppModal({ curso, isOpen, onClose }: WhatsAppModalProps) {
       return;
     }
 
-    // Montagem da API
     const areaOfInterest = curso.titulo;
     const enterpriseId = toSafeNumber(process.env.NEXT_PUBLIC_ENTERPRISE_ID, 1);
 
