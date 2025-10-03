@@ -39,52 +39,50 @@ export default function SaibaMais() {
     cursoInteresse: "",
   });
 
-const beneficios = [ 
-  {
-    titulo: "Aprendizado Prático",
-    icone: "🎯",
-    descricao:
-      "Você aprende fazendo! Desenvolve habilidades reais que pode aplicar imediatamente no mercado de trabalho.",
-    detalhes: [
-      "Projetos baseados em situações reais",
-      
-      "Metodologia voltada para prática profissional",
-    ],
-  },
-  {
-    titulo: "Flexibilidade",
-    icone: "⏱️",
-    descricao:
-      "Estude no seu ritmo! Reconhecemos suas experiências e adaptamos o curso às suas necessidades.",
-    detalhes: [
-      "Reconhecimento de conhecimentos prévios",
-      "Opções de horários online",
-   
-    ],
-  },
-  {
-    titulo: "Empregabilidade",
-    icone: "💼",
-    descricao:
-      "Foco direto no mercado! Você adquire as competências que as empresas realmente procuram.",
-    detalhes: [
-      "Parcerias com empresas e programas de estágio",
-      "Certificação valorizada no mercado",
-      "Alta taxa de inserção profissional",
-    ],
-  },
-  {
-    titulo: "Custo-Benefício",
-    icone: "💰",
-    descricao:
-      "Formação acessível e estratégica! Cursos de curta ou média duração, com retorno rápido no mercado.",
-    detalhes: [
-      "Mensalidades que cabem no bolso",
-      "Tempo de formação menor que cursos tradicionais",
-      
-    ],
-  },
-];
+  const beneficios = [
+    {
+      titulo: "Aprendizado Prático",
+      icone: "🎯",
+      descricao:
+        "Você aprende fazendo! Desenvolve habilidades reais que pode aplicar imediatamente no mercado de trabalho.",
+      detalhes: [
+        "Projetos baseados em situações reais",
+
+        "Metodologia voltada para prática profissional",
+      ],
+    },
+    {
+      titulo: "Flexibilidade",
+      icone: "⏱️",
+      descricao:
+        "Estude no seu ritmo! Reconhecemos suas experiências e adaptamos o curso às suas necessidades.",
+      detalhes: [
+        "Reconhecimento de conhecimentos prévios",
+        "Opções de horários online",
+      ],
+    },
+    {
+      titulo: "Empregabilidade",
+      icone: "💼",
+      descricao:
+        "Foco direto no mercado! Você adquire as competências que as empresas realmente procuram.",
+      detalhes: [
+        "Parcerias com empresas e programas de estágio",
+        "Certificação valorizada no mercado",
+        "Alta taxa de inserção profissional",
+      ],
+    },
+    {
+      titulo: "Custo-Benefício",
+      icone: "💰",
+      descricao:
+        "Formação acessível e estratégica! Cursos de curta ou média duração, com retorno rápido no mercado.",
+      detalhes: [
+        "Mensalidades que cabem no bolso",
+        "Tempo de formação menor que cursos tradicionais",
+      ],
+    },
+  ];
 
   const depoimentos = [
     {
@@ -237,76 +235,49 @@ const beneficios = [
     <>
       <main className="min-h-screen bg-gradient-to-b from-black to-gray-900">
         {/* Hero */}
-        <section className="relative bg-gradient-to-r from-gray-900 via-orange-600 to-gray-800 text-white py-20">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 transform transition-transform duration-700 ease-out text-white">
-              Educação que Transforma sua Carreira
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90">
-              Descubra por que a formação é o caminho mais
-              inteligente para o sucesso profissional
-            </p>
-            <button
-              onClick={() => setShowModalInscricao(true)}
-              className="bg-orange-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
-              Quero Me Inscrever
-            </button>
+        {/* Hero (Banner responsivo) */}
+        <section className="relative w-full text-white overflow-hidden">
+          {/* Imagem responsiva */}
+          <div className="w-full h-[420px] md:h-[560px] lg:h-[600px]">
+            <picture>
+              {/* >= 1536px */}
+              <source media="(min-width: 1536px)" srcSet="images/cta_1024x600.png" />
+              {/* >= 1280px */}
+              <source media="(min-width: 1280px)" srcSet="images/cta_1920x600.png" />
+              {/* >= 1024px */}
+              <source media="(min-width: 1024px)" srcSet="images/cta_1024x600.png" />
+              {/* < 1024px (mobile) */}
+              <img
+                src="images/cta_768x920.png"
+                alt="Sua carreira técnica começa aqui! EDUCAVALES"
+                className="w-full h-full object-cover"
+                loading="eager"
+                decoding="async"
+              />
+            </picture>
+
+            {/* Overlay para legibilidade do texto */}
+            <div className="absolute inset-0 bg-black/30 md:bg-black/20 pointer-events-none" />
           </div>
-        </section>
 
-        {/* Benefícios com Abas Interativas */}
-        <section className="py-16 bg-gray-900">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
-              Vantagens Exclusivas da Nossa Metodologia
-            </h2>
+          {/* Conteúdo sobre a imagem */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="container mx-auto px-4 text-center">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 drop-shadow-lg">
+                Educação que Transforma sua Carreira
+              </h1>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Tabs */}
-              <div className="space-y-4">
-                {beneficios.map((beneficio, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveTab(index)}
-                    className={`w-full text-left p-6 rounded-xl transition-all duration-300 ${
-                      activeTab === index
-                        ? "bg-orange-500 text-white shadow-lg transform scale-105 border-2 border-orange-400"
-                        : "bg-gray-800 text-gray-200 hover:bg-gray-700 border-2 border-gray-700"
-                    }`}
-                  >
-                    <div className="flex items-center space-x-4">
-                      <span className="text-2xl">{beneficio.icone}</span>
-                      <span className="text-xl font-semibold">
-                        {beneficio.titulo}
-                      </span>
-                    </div>
-                  </button>
-                ))}
-              </div>
+              <p className="text-lg md:text-2xl mb-6 md:mb-8 opacity-95 max-w-3xl mx-auto drop-shadow">
+                Descubra por que a formação é o caminho mais inteligente para o
+                sucesso profissional
+              </p>
 
-              {/* Conteúdo da Aba */}
-              <div className="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700">
-                <div className="animate-fade-in">
-                  <h3 className="text-2xl font-bold text-white mb-4 flex items-center">
-                    <span className="text-3xl mr-3">
-                      {beneficios[activeTab].icone}
-                    </span>
-                    {beneficios[activeTab].titulo}
-                  </h3>
-                  <p className="text-gray-300 text-lg mb-6">
-                    {beneficios[activeTab].descricao}
-                  </p>
-                  <ul className="space-y-3">
-                    {beneficios[activeTab].detalhes.map((detalhe, idx) => (
-                      <li key={idx} className="flex items-center text-gray-200">
-                        <span className="text-orange-400 mr-2">✓</span>
-                        {detalhe}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              <button
+                onClick={() => setShowModalInscricao(true)}
+                className="bg-orange-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                Quero Me Inscrever
+              </button>
             </div>
           </div>
         </section>
@@ -476,9 +447,15 @@ const beneficios = [
                     className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                     required
                   >
-                    <option value="" className="bg-gray-800">Selecione um curso</option>
+                    <option value="" className="bg-gray-800">
+                      Selecione um curso
+                    </option>
                     {cursos.map((curso, index) => (
-                      <option key={index} value={curso.nome} className="bg-gray-800">
+                      <option
+                        key={index}
+                        value={curso.nome}
+                        className="bg-gray-800"
+                      >
                         {curso.nome}
                       </option>
                     ))}
@@ -584,9 +561,15 @@ const beneficios = [
                     className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                     required
                   >
-                    <option value="" className="bg-gray-800">Selecione um curso</option>
+                    <option value="" className="bg-gray-800">
+                      Selecione um curso
+                    </option>
                     {cursos.map((curso, index) => (
-                      <option key={index} value={curso.nome} className="bg-gray-800">
+                      <option
+                        key={index}
+                        value={curso.nome}
+                        className="bg-gray-800"
+                      >
                         {curso.nome}
                       </option>
                     ))}
