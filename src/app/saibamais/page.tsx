@@ -241,14 +241,23 @@ export default function SaibaMais() {
           <div className="w-full h-[420px] md:h-[560px] lg:h-[600px]">
             <picture>
               {/* >= 1536px */}
-              <source media="(min-width: 1536px)" srcSet="images/cta_1024x600.png" />
+              <source
+                media="(min-width: 1536px)"
+                srcSet="images/hero_1024x600.png"
+              />
               {/* >= 1280px */}
-              <source media="(min-width: 1280px)" srcSet="images/cta_1920x600.png" />
+              <source
+                media="(min-width: 1280px)"
+                srcSet="images/hero_1920x600.png"
+              />
               {/* >= 1024px */}
-              <source media="(min-width: 1024px)" srcSet="images/cta_1024x600.png" />
+              <source
+                media="(min-width: 1024px)"
+                srcSet="images/hero_1024x600.png"
+              />
               {/* < 1024px (mobile) */}
               <img
-                src="images/cta_768x920.png"
+                src="images/hero_768x920.png"
                 alt="Sua carreira técnica começa aqui! EDUCAVALES"
                 className="w-full h-full object-cover"
                 loading="eager"
@@ -261,17 +270,8 @@ export default function SaibaMais() {
           </div>
 
           {/* Conteúdo sobre a imagem */}
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-end justify-center pb-16">
             <div className="container mx-auto px-4 text-center">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 drop-shadow-lg">
-                Educação que Transforma sua Carreira
-              </h1>
-
-              <p className="text-lg md:text-2xl mb-6 md:mb-8 opacity-95 max-w-3xl mx-auto drop-shadow">
-                Descubra por que a formação é o caminho mais inteligente para o
-                sucesso profissional
-              </p>
-
               <button
                 onClick={() => setShowModalInscricao(true)}
                 className="bg-orange-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
@@ -283,7 +283,7 @@ export default function SaibaMais() {
         </section>
 
         {/* Números */}
-        <section className="py-16 bg-orange-600 text-white">
+        <section className="py-16 bg-orange-600/70 text-white">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div className="animate-bounce-in">

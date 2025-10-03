@@ -1,5 +1,5 @@
 // src/components/Hero.jsx
-'use client';
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -17,14 +17,23 @@ export default function Hero() {
       <div className="w-full h-[480px] md:h-[600px]">
         <picture>
           {/* >= 1536px */}
-          <source media="(min-width: 1536px)" srcSet="images/hero_1024x600.png" />
+          <source
+            media="(min-width: 1536px)"
+            srcSet="images/cta_1024x600.png"
+          />
           {/* >= 1280px */}
-          <source media="(min-width: 1280px)" srcSet="images/hero_1920x600.png" />
+          <source
+            media="(min-width: 1280px)"
+            srcSet="images/cta_1920x600.png"
+          />
           {/* >= 1024px */}
-          <source media="(min-width: 1024px)" srcSet="images/hero_1024x600.png" />
+          <source
+            media="(min-width: 1024px)"
+            srcSet="images/cta_1024x600.png"
+          />
           {/* Mobile (<1024px) */}
           <img
-            src="images/hero_768x920.png"
+            src="images/cta_768x920.png"
             alt="Sua carreira técnica começa aqui! EDUCAVALES"
             className="w-full h-full object-cover"
             loading="eager"
@@ -34,13 +43,12 @@ export default function Hero() {
       </div>
 
       {/* Conteúdo por cima do banner */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 z-10">
+      <div className="absolute inset-0 flex flex-col justify-end items-center text-center px-4 z-10 pb-16">
         <div
           className={`transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
             <Link
               href="#cursos"
